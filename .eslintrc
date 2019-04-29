@@ -8,6 +8,10 @@
   "plugins": ["react", "import", "jsx-a11y"],
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "globals": {
-    "Expo": true
+    "Expo": true,
+    "__DEV__": true
+  },
+  "rules": {
+    "no-console": 0
   }
 }

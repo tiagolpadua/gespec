@@ -1,8 +1,13 @@
+import { Ionicons } from "@expo/vector-icons";
+import { AppLoading, Asset, Font, Icon } from "expo";
+import PropTypes from "prop-types";
 import React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Asset, Font, Icon } from "expo";
+import { Provider } from "react-redux";
+import configureStore from "./configureStore";
 import AppNavigator from "./navigation/AppNavigator";
-import { Ionicons } from "@expo/vector-icons";
+
+const store = configureStore();
 
 export default class gespec extends React.Component {
   state = {
@@ -28,10 +33,12 @@ export default class gespec extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
+        <Provider store={store}>
+          <View style={styles.container}>
+            {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+            <AppNavigator />
+          </View>
+        </Provider>
       );
     }
   }
@@ -62,6 +69,10 @@ export default class gespec extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
+
+gespec.propTypes = {
+  skipLoadingScreen: PropTypes.bool
+};
 
 const styles = StyleSheet.create({
   container: {
