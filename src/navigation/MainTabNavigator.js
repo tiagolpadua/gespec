@@ -1,93 +1,40 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { Platform } from "react-native";
 import {
-  createBottomTabNavigator,
+  createMaterialTopTabNavigator,
   createStackNavigator
 } from "react-navigation";
-import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
-import SettingsScreen from "../screens/SettingsScreen";
+import AnimaisScreen from "../screens/AnimaisScreen";
+import ManejosScreen from "../screens/ManejosScreen";
+import SobreScreen from "../screens/SobreScreen";
 
-// HomeStack
-
-const HomeStack = createStackNavigator({
-  Home: HomeScreen
+// AnimaisStack
+const AnimaisStack = createStackNavigator({
+  Animais: AnimaisScreen
 });
 
-function HomeStackTabBarIcon({ focused }) {
-  return (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === "ios"
-          ? `ios-information-circle${focused ? "" : "-outline"}`
-          : "md-information-circle"
-      }
-    />
-  );
-}
-
-HomeStackTabBarIcon.propTypes = {
-  focused: PropTypes.bool
+AnimaisStack.navigationOptions = {
+  tabBarLabel: "Animais"
 };
 
-HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
-  tabBarIcon: HomeStackTabBarIcon
-};
-
-// LinksStack
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen
+// ManejosStack
+const ManejosStack = createStackNavigator({
+  Manejos: ManejosScreen
 });
 
-function LinksStackTabBarIcon({ focused }) {
-  return (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-link" : "md-link"}
-    />
-  );
-}
-
-LinksStackTabBarIcon.propTypes = {
-  focused: PropTypes.bool
+ManejosStack.navigationOptions = {
+  tabBarLabel: "Manejos"
 };
 
-LinksStack.navigationOptions = {
-  tabBarLabel: "Links",
-  tabBarIcon: LinksStackTabBarIcon
-};
-
-// SettingsStack
-
-function SettingsStackTabBarIcon({ focused }) {
-  return (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-    />
-  );
-}
-
-SettingsStackTabBarIcon.propTypes = {
-  focused: PropTypes.bool
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
+// SobreStack
+const SobreStack = createStackNavigator({
+  Sobre: SobreScreen
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: "Settings",
-  tabBarIcon: SettingsStackTabBarIcon
+SobreStack.navigationOptions = {
+  tabBarLabel: "Sobre"
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack
+export default createMaterialTopTabNavigator({
+  AnimaisStack,
+  ManejosStack,
+  SobreStack
 });

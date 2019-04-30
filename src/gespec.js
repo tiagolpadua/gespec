@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import { AppLoading, Asset, Font, Icon } from "expo";
+import { AppLoading, Asset, Constants, Font, Icon } from "expo";
 import PropTypes from "prop-types";
 import React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 import configureStore from "./configureStore";
 import AppNavigator from "./navigation/AppNavigator";
@@ -35,7 +35,6 @@ export default class gespec extends React.Component {
       return (
         <Provider store={store}>
           <View style={styles.container}>
-            {Platform.OS === "ios" && <StatusBar barStyle="default" />}
             <AppNavigator />
           </View>
         </Provider>
@@ -77,6 +76,7 @@ gespec.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    marginTop: Platform.OS === "ios" ? 0 : Constants.statusBarHeight
   }
 });
